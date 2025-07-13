@@ -5,7 +5,7 @@
 
 [build.environment]
   # Node.js version
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   # Disable Next.js telemetry
   NEXT_TELEMETRY_DISABLED = "1"
   # Enable Netlify Next.js plugin
