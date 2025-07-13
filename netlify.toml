@@ -4,8 +4,8 @@
   functions = "functions"
 
 [build.environment]
-  # Node.js version
-  NODE_VERSION = "20"
+  # Node.js version (must be in format x.y.z)
+  NODE_VERSION = "20.0.0"
   # Disable Next.js telemetry
   NEXT_TELEMETRY_DISABLED = "1"
   # Enable Netlify Next.js plugin
@@ -19,13 +19,7 @@
 # Configure build plugins
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    # Enable ISR (Incremental Static Regeneration)
-    enableISR = true
-    # Enable image optimization
-    enableImages = true
-    # Enable webpack 5
-    enableWebpack5 = true
+  # No additional inputs needed as they are enabled by default
 
 # Configure build image
 [build.image]
