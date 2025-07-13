@@ -1,0 +1,101 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+  functions = "functions"
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "18"
+  # Enable Next.js SSR and SSG support
+  NEXT_TELEMETRY_DISABLED = "1"
+  # Disable Next.js telemetry
+  NEXT_TELEMETRY_DISABLED = "1"
+  # Enable Netlify Next.js plugin
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
+  # Set build directory
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
+
+# Configure build plugins
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    # Enable ISR (Incremental Static Regeneration)
+    enableISR = true
+    # Enable image optimization
+    enableImages = true
+    # Enable webpack 5
+    enableWebpack5 = true
+
+# Configure build image
+[build.image]
+  # Use the latest Ubuntu-based build image
+  # with Node.js 18 pre-installed
+  node = "18"
+
+# Configure build environment
+[build.processing]
+  # Enable HTML minification
+  html = { pretty_urls = true }
+  # Enable CSS minification
+  css = { bundle = true, minify = true }
+  # Enable JS minification
+  js = { bundle = true, minify = true }
+  # Enable image optimization
+  images = { compress = true }
+
+# Configure redirects
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Configure security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data: blob: *.google-analytics.com *.doubleclick.net *.coinmarketcap.com *.cryptologos.cc; font-src 'self' fonts.gstatic.com; connect-src 'self' *.google-analytics.com *.analytics.google.com *.doubleclick.net;"
+
+# Configure build caching
+[build.caching]
+  # Cache node_modules for faster builds
+  directory = ["node_modules/.cache", ".next/cache"]
+
+# Configure build environment variables
+[build.environment]
+  # Set to true to enable debug logging
+  DEBUG = "false"
+  # Set to true to enable verbose logging
+  NETLIFY_NEXT_DEBUG = "false"
+  # Set to true to enable Next.js debug logging
+  NEXT_DEBUG = "false"
+  # Set to true to enable webpack debug logging
+  DEBUG_WEBPACK = "false"
+
+# Configure build settings for previews
+[context.deploy-preview]
+  command = "npm run build"
+  publish = "out"
+  functions = "functions"
+
+# Configure build settings for production
+[context.production]
+  command = "npm run build"
+  publish = "out"
+  functions = "functions"
+  [context.production.environment]
+    NODE_ENV = "production"
+    NEXT_PUBLIC_VERCEL_ENV = "production"
+
+# Configure build settings for branch deploys
+[context.branch-deploy]
+  command = "npm run build"
+  publish = "out"
+  functions = "functions"
+  [context.branch-deploy.environment]
+    NODE_ENV = "development"
+    NEXT_PUBLIC_VERCEL_ENV = "development"
