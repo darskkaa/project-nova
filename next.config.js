@@ -49,16 +49,9 @@ const nextConfig = {
   // Enable source maps in production for debugging
   productionBrowserSourceMaps: true,
   
-  // Optional: Add redirects
-  async redirects() {
-    return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
-    ];
-  },
+  // Disable redirects in static export
+  // Redirects are not supported with output: 'export'
+  // Consider handling redirects at the hosting level or client-side
 };
 
 // For production builds, we want to use the Netlify plugin
