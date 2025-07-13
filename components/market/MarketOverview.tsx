@@ -8,7 +8,7 @@ export default function MarketOverview() {
   const [marketData, setMarketData] = useState<GlobalMarketData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [apiKeyStatus, setApiKeyStatus] = useState<string>('Checking API key...');
+  const [apiKeyStatus, setApiKeyStatus] = useState<string>('Checking API configuration...');
   const [isMounted, setIsMounted] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
@@ -16,12 +16,12 @@ export default function MarketOverview() {
   useEffect(() => {
     const apiKey = process.env.NEXT_PUBLIC_COINMARKETCAP_API_KEY;
     if (!apiKey) {
-      setApiKeyStatus('❌ API Key: Not found. Please check your .env.local file');
+      setApiKeyStatus('❌ API Key: Not configured. Please check your environment variables');
       setError('API key is not configured');
       setIsLoading(false);
       return;
     }
-    setApiKeyStatus(`✅ API Key: ${apiKey.substring(0, 5)}...${apiKey.substring(apiKey.length - 4)}`);
+    setApiKeyStatus('✅ API: Ready');
     setIsMounted(true);
   }, []);
 
@@ -115,17 +115,15 @@ export default function MarketOverview() {
       
       {/* API Key Status */}
       <div className={`p-3 rounded-md ${
-        apiKeyStatus.includes('Not found') 
+        apiKeyStatus.includes('Not configured') 
           ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' 
           : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200'
       }`}>
         <p className="font-medium">{apiKeyStatus}</p>
         {!process.env.NEXT_PUBLIC_COINMARKETCAP_API_KEY && (
-          <div className="text-sm mt-1">
-            <p>Please create a <code>.env.local</code> file in your project root with:</p>
-            <pre className="mt-1 p-2 bg-black/10 dark:bg-white/10 rounded font-mono text-xs overflow-x-auto">
-              NEXT_PUBLIC_COINMARKETCAP_API_KEY=your_api_key_here
-            </pre>
+          <div className="mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 rounded-md text-sm">
+            <p className="font-medium mb-1">API Configuration Required</p>
+            <p className="text-xs opacity-80 mb-2">Please set up your environment variables in the deployment settings.</p>
           </div>
         )}
       </div>

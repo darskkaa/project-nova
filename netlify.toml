@@ -6,13 +6,9 @@
 [build.environment]
   # Node.js version
   NODE_VERSION = "18"
-  # Enable Next.js SSR and SSG support
-  NEXT_TELEMETRY_DISABLED = "1"
   # Disable Next.js telemetry
   NEXT_TELEMETRY_DISABLED = "1"
   # Enable Netlify Next.js plugin
-  NETLIFY_NEXT_PLUGIN_SKIP = "false"
-  # Set build directory
   NETLIFY_NEXT_PLUGIN_SKIP = "false"
 
 # Configure build plugins
