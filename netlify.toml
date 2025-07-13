@@ -24,8 +24,8 @@
 # Configure build image
 [build.image]
   # Use the latest Ubuntu-based build image
-  # with Node.js 20 pre-installed
-  node = "20"
+  # with Node.js 22 pre-installed
+  node = "22"
 
 # Configure build environment
 [build.processing]
