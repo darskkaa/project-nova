@@ -2,8 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Required for Netlify deployment
-  target: 'serverless',
   // Enable static exports
   output: 'export',
   // Base path if your app is hosted in a subdirectory
